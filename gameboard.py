@@ -5,6 +5,11 @@ import copy
 
 class Gameboard:
     """The chess game board."""
+    LENGTH = 8
+
+    # The rank numbers and file letters are written from white's perspective
+    RANK_NUMBERS = tuple(range(8, 0, -1))
+    FILE_LETTERS = ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H')
 
     '''
     The board is implemented as a 2D list, where the first index relates to the
@@ -36,9 +41,15 @@ class Gameboard:
         Print the board from the perspective of the player with the given color.
         """
         if color == 'white':
-            for rank in self.__board:
-                print(' '.join(rank))
+            for i in range(Gameboard.LENGTH):
+                rank_number = Gameboard.RANK_NUMBERS[i]
+                rank = ' '.join(self.__board[i])
+                print(f'{rank_number}   {rank}')
+            print(f'\n    {" ".join(Gameboard.FILE_LETTERS)}')
 
         elif color == 'black':
-            for rank in reversed(self.__board):
-                print(' '.join(reversed(rank)))
+            for i in reversed(range(Gameboard.LENGTH)):
+                rank_number = Gameboard.RANK_NUMBERS[i]
+                rank = ' '.join(reversed(self.__board[i]))
+                print(f'{rank_number}   {rank}')
+            print(f'\n    {" ".join(reversed(Gameboard.FILE_LETTERS))}')
