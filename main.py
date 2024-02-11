@@ -1,5 +1,8 @@
 # main.py
 
+import copy
+
+
 class Player:
     """A player."""
 
@@ -31,6 +34,10 @@ class Gameboard:
     def __init__(self):
         """Initialize the game board."""
         self.__board = Gameboard.INITIAL_BOARD
+
+    def getBoard(self):
+        """Get a copy of the game board."""
+        return copy.deepcopy(self.__board)
 
 
 def main():
