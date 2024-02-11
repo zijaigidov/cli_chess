@@ -35,7 +35,7 @@ class Gameboard:
         """Initialize the game board."""
         self.__board = Gameboard.INITIAL_BOARD
 
-    def getBoard(self):
+    def get_board(self):
         """Get a copy of the game board."""
         return copy.deepcopy(self.__board)
 
