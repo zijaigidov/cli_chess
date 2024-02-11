@@ -39,6 +39,18 @@ class Gameboard:
         """Get a copy of the game board."""
         return copy.deepcopy(self.__board)
 
+    def print_board(self, color):
+        """
+        Print the board from the perspective of the player with the given color.
+        """
+        if color == 'white':
+            for rank in self.__board:
+                print(' '.join(rank))
+
+        elif color == 'black':
+            for rank in reversed(self.__board):
+                print(' '.join(reversed(rank)))
+
 
 def main():
     pass
