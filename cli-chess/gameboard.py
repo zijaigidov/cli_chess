@@ -3,6 +3,17 @@
 import copy
 
 
+class Square:
+    """A square on the chess board."""
+
+    def __init__(self, piece=None):
+        """Initialize the square with a piece."""
+        self.piece = piece
+
+    def is_empty(self):
+        return self.piece is None
+
+
 class Gameboard:
     """The chess game board."""
     LENGTH = 8
