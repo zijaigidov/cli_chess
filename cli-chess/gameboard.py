@@ -20,9 +20,6 @@ class Piece:
 
 
 class Gameboard:
-    # The rank numbers and file letters are written from white's perspective
-    RANK_NUMBERS = tuple(range(8, 0, -1))
-    FILE_LETTERS = ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H')
     LENGTH = 8
 
     def __init__(self):
