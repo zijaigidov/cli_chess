@@ -34,9 +34,9 @@ class Gameboard:
     LENGTH = 8
 
     def __init__(self):
-        self.__board = self.__initialize_board()
+        self._board = self._initialize_board()
 
-    def __initialize_board(self):
+    def _initialize_board(self):
         """Initialize the game board."""
         '''
         The board is implemented as a 2D list, where the first index relates to
@@ -66,4 +66,4 @@ class Gameboard:
 
     def get_board(self):
         """Get a copy of the game board."""
-        return copy.deepcopy(self.__board)
+        return copy.deepcopy(self._board)
