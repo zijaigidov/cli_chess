@@ -2,6 +2,8 @@
 
 import copy
 
+import gamepieces
+
 
 class Square:
     """A square on the chess board."""
@@ -45,10 +47,10 @@ class Gameboard:
         board = [
             ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'],
             ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
-            ['', '', '', '', '', '', '', ''],
-            ['', '', '', '', '', '', '', ''],
-            ['', '', '', '', '', '', '', ''],
-            ['', '', '', '', '', '', '', ''],
+            [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
             ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
             ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R']
         ]
@@ -56,8 +58,11 @@ class Gameboard:
         # Convert all of the board squares into Square objects
         for row in range(Gameboard.LENGTH):
             for col in range(Gameboard.LENGTH):
-                value = board[row][col]
-                board[row][col] = Square(value) if value else Square()
+                val = board[row][col]
+                if val in gamepieces.PIECES:
+                    board[row][col] = Square(val)
+                else:
+                    board[row][col] = Square()
 
     def get_board(self):
         """Get a copy of the game board."""
