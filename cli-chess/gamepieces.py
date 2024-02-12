@@ -1,0 +1,9 @@
+# gamepieces.py
+
+KING = 'K'
+QUEEN = 'Q'
+ROOK = 'R'
+BISHOP = 'B'
+KNIGHT = 'N'
+PAWN = 'P'
+PIECES = {KING, QUEEN, ROOK, BISHOP, KNIGHT, PAWN}
