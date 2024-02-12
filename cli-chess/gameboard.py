@@ -14,6 +14,15 @@ class Square:
         return self.piece is None
 
 
+class Piece:
+    """A piece on the chess board."""
+
+    def __init__(self, piece_symbol, color):
+        """Initialize the piece with a symbol and color."""
+        self.piece = piece_symbol
+        self.color = color
+
+
 class Gameboard:
     """The chess game board."""
 
