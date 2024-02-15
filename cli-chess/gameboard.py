@@ -63,5 +63,22 @@ class Gameboard:
         self._initialize_empty_board()
         self._add_initial_pieces()
 
+    def print_board(self) -> None:
+        """Print the chess board as seen by the white player, with rank numbers
+        and file letters."""
+        RANK_NUMBERS = (8, 7, 6, 5, 4, 3, 2, 1)
+        FILE_LETTERS = ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H')
+
+        for i in range(Gameboard.LENGTH):
+            print(RANK_NUMBERS[i], end='   ')
+            for j in range(Gameboard.LENGTH):
+                square = self._board[i][j]
+                if not square.is_empty():
+                    print(square.piece.piece, end=' ')
+                else:
+                    print(' ', end=' ')
+            print()
+        print(f'\n    {" ".join(FILE_LETTERS)}')
+
     def get_board_copy(self):
         return copy.deepcopy(self._board)
