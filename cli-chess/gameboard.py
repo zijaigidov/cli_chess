@@ -1,6 +1,7 @@
 # gameboard.py
 
 import copy
+from dataclasses import dataclass
 
 import gamepieces
 
@@ -11,6 +12,13 @@ class Square:
 
     def is_empty(self):
         return self.piece is None
+
+
+@dataclass
+class Color:
+    """A chess player's color."""
+    WHITE: str = 'white'
+    BLACK: str = 'black'
 
 
 class Piece:
@@ -48,7 +56,7 @@ class Gameboard:
         for row in BLACK_RANGE:
             for col in range(Gameboard.LENGTH):
                 piece_symbol = INITIAL_PIECES[row][col]
-                self._add_board_piece(row, col, piece_symbol, 'black')
+                self._add_board_piece(row, col, piece_symbol, Color.BLACK)
 
         # Add the white pieces
         WHITE_RANGE = range(Gameboard.LENGTH - len(INITIAL_PIECES),
@@ -56,7 +64,7 @@ class Gameboard:
         for row in WHITE_RANGE:
             for col in range(Gameboard.LENGTH):
                 piece_symbol = INITIAL_PIECES[Gameboard.LENGTH - 1 - row][col]
-                self._add_board_piece(row, col, piece_symbol, 'white')
+                self._add_board_piece(row, col, piece_symbol, Color.WHITE)
 
     def _initialize_board(self) -> None:
         """Initialize the state of the game board."""
