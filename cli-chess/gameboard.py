@@ -22,8 +22,8 @@ class Color:
 
 
 class Piece:
-    def __init__(self, piece_symbol, color):
-        self.piece = piece_symbol
+    def __init__(self, symbol, color):
+        self.symbol = symbol
         self.color = color
 
 
@@ -38,11 +38,11 @@ class Gameboard:
         self._board = [[Square() for _ in range(Gameboard.LENGTH)]
                        for _ in range(Gameboard.LENGTH)]
 
-    def _add_board_piece(self, row: int, col: int, piece_symbol: str,
+    def _add_board_piece(self, row: int, col: int, symbol: str,
                          color: str) -> None:
         """Add a piece to the board on the specified position."""
         square = self._board[row][col]
-        square.piece = Piece(piece_symbol, color)
+        square.piece = Piece(symbol, color)
 
     def _add_initial_pieces(self) -> None:
         """Add the initial pieces to the board."""
@@ -82,7 +82,7 @@ class Gameboard:
             for j in range(Gameboard.LENGTH):
                 square = self._board[i][j]
                 if not square.is_empty():
-                    print(square.piece.piece, end=' ')
+                    print(square.piece.symbol, end=' ')
                 else:
                     print(' ', end=' ')
             print()
