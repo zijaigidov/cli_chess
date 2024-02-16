@@ -2,15 +2,22 @@
 
 import copy
 from dataclasses import dataclass
+from typing import Optional
 
 import gamepieces
 
 
+class Piece:
+    def __init__(self, symbol: str, color: str):
+        self.symbol = symbol
+        self.color = color
+
+
 class Square:
-    def __init__(self, piece=None):
+    def __init__(self, piece: Optional[Piece] = None):
         self.piece = piece
 
-    def is_empty(self):
+    def is_empty(self) -> bool:
         return self.piece is None
 
 
@@ -19,12 +26,6 @@ class Color:
     """A chess player's color."""
     WHITE: str = 'white'
     BLACK: str = 'black'
-
-
-class Piece:
-    def __init__(self, symbol, color):
-        self.symbol = symbol
-        self.color = color
 
 
 class Gameboard:
@@ -88,5 +89,5 @@ class Gameboard:
             print()
         print(f'\n    {" ".join(FILE_LETTERS)}')
 
-    def get_board_copy(self):
+    def get_board_copy(self) -> 'Gameboard':
         return copy.deepcopy(self._board)
