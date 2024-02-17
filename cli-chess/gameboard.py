@@ -29,6 +29,9 @@ class Color:
 
 
 class Gameboard:
+    # NOTE: The files and ranks are ordered from the white player's perspective.
+    FILE_LETTERS = ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H')
+    RANK_NUMBERS = (8, 7, 6, 5, 4, 3, 2, 1)
     LENGTH = 8
 
     def __init__(self):
@@ -75,11 +78,8 @@ class Gameboard:
     def print_board(self) -> None:
         """Print the chess board as seen by the white player, with rank numbers
         and file letters."""
-        RANK_NUMBERS = (8, 7, 6, 5, 4, 3, 2, 1)
-        FILE_LETTERS = ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H')
-
         for i in range(Gameboard.LENGTH):
-            print(RANK_NUMBERS[i], end='   ')
+            print(Gameboard.RANK_NUMBERS[i], end='   ')
             for j in range(Gameboard.LENGTH):
                 square = self._board[i][j]
                 if not square.is_empty():
@@ -87,7 +87,7 @@ class Gameboard:
                 else:
                     print(' ', end=' ')
             print()
-        print(f'\n    {" ".join(FILE_LETTERS)}')
+        print(f'\n    {" ".join(Gameboard.FILE_LETTERS)}')
 
     def get_board_copy(self) -> 'Gameboard':
         return copy.deepcopy(self._board)

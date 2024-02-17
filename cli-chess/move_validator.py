@@ -1,5 +1,8 @@
 # movevalidator.py
 
+from gameboard import Gameboard
+
+
 class MoveValidator:
     """Chess move validator."""
 
@@ -14,12 +17,9 @@ class MoveValidator:
         Returns:
             A boolean indicating whether or not the square is a valid square.
         """
-        RANK_NUMBERS = (8, 7, 6, 5, 4, 3, 2, 1)
-        FILE_LETTERS = ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H')
-
         if len(square_coordinates) != 2:
             return False
 
         file = square_coordinates[0].upper()
         rank = int(square_coordinates[1])
-        return file in FILE_LETTERS and rank in RANK_NUMBERS
+        return file in Gameboard.FILE_LETTERS and rank in Gameboard.RANK_NUMBERS
