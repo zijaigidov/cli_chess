@@ -3,6 +3,10 @@
 from gameboard import Gameboard
 
 
+class InvalidSquareError (Exception):
+    pass
+
+
 class MoveValidator:
     """Chess move validator."""
 
@@ -24,8 +28,16 @@ class MoveValidator:
 
         Returns:
             A boolean indicating whether or not the move is legal.
+
+        Raises:
+            InvalidSquareError: If an invalid square is passed.
         """
-        pass
+
+        # Check if the squares are valid
+        if not MoveValidator.is_valid_square(start_square):
+            raise InvalidSquareError(f"invalid square: '{start_square}'")
+        elif not MoveValidator.is_valid_square(end_square):
+            raise InvalidSquareError(f"invalid square: '{end_square}'")
 
     @staticmethod
     def is_valid_square(square_coordinates: str) -> bool:
