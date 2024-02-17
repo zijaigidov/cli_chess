@@ -1,4 +1,4 @@
-# movevalidator.py
+# move_validator.py
 
 from gameboard import Gameboard
 
