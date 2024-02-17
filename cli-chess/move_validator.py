@@ -7,6 +7,27 @@ class MoveValidator:
     """Chess move validator."""
 
     @staticmethod
+    def is_legal_move(start_square: str,
+                      end_square: str,
+                      player_color: str,
+                      board) -> bool:
+        """Check if moving a piece from one square to another is legal.
+
+        Args:
+            start_square: A string representing the square of the piece prior
+              to the move.
+            end_square: A string representing the square of the piece after the
+              move.
+            player_color: A string representing the color of the player making
+              the move.
+            board: The chess board.
+
+        Returns:
+            A boolean indicating whether or not the move is legal.
+        """
+        pass
+
+    @staticmethod
     def is_valid_square(square_coordinates: str) -> bool:
         """Check if a square described by a file and rank is valid.
 
