@@ -1,6 +1,6 @@
 # move_validator.py
 
-from gameboard import BoardInfo
+from gameboard import Square
 
 
 class InvalidSquareError (Exception):
@@ -34,25 +34,7 @@ class MoveValidator:
         """
 
         # Check if the squares are valid
-        if not MoveValidator.is_valid_square(start_square):
+        if not Square.is_valid_square(start_square):
             raise InvalidSquareError(f"invalid square: '{start_square}'")
-        elif not MoveValidator.is_valid_square(end_square):
+        elif not Square.is_valid_square(end_square):
             raise InvalidSquareError(f"invalid square: '{end_square}'")
-
-    @staticmethod
-    def is_valid_square(square_coordinates: str) -> bool:
-        """Check if a square described by a file and rank is valid.
-
-        Args:
-            square_coordinates: A string where the first character is the file
-              letter and and the second is the rank number, e.g. 'E4'.
-
-        Returns:
-            A boolean indicating whether or not the square is a valid square.
-        """
-        if len(square_coordinates) != 2:
-            return False
-
-        file = square_coordinates[0].upper()
-        rank = int(square_coordinates[1])
-        return file in BoardInfo.FILE_LETTERS and rank in BoardInfo.RANK_NUMBERS
