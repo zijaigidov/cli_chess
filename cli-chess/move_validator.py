@@ -1,6 +1,6 @@
 # move_validator.py
 
-from gameboard import Gameboard
+from gameboard import BoardInfo
 
 
 class InvalidSquareError (Exception):
@@ -55,4 +55,4 @@ class MoveValidator:
 
         file = square_coordinates[0].upper()
         rank = int(square_coordinates[1])
-        return file in Gameboard.FILE_LETTERS and rank in Gameboard.RANK_NUMBERS
+        return file in BoardInfo.FILE_LETTERS and rank in BoardInfo.RANK_NUMBERS

@@ -28,19 +28,23 @@ class Color:
     BLACK: str = 'black'
 
 
-class Gameboard:
+@dataclass
+class BoardInfo:
+    """Information about the chess board."""
     # NOTE: The files and ranks are ordered from the white player's perspective.
     FILE_LETTERS = ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H')
     RANK_NUMBERS = (8, 7, 6, 5, 4, 3, 2, 1)
     LENGTH = 8
 
+
+class Gameboard:
     def __init__(self):
         self._initialize_board()
 
     def _initialize_empty_board(self) -> None:
         """Initialize an empty board."""
-        self._board = [[Square() for _ in range(Gameboard.LENGTH)]
-                       for _ in range(Gameboard.LENGTH)]
+        self._board = [[Square() for _ in range(BoardInfo.LENGTH)]
+                       for _ in range(BoardInfo.LENGTH)]
 
     def _add_board_piece(self, row: int, col: int, symbol: str,
                          color: str) -> None:
@@ -58,16 +62,16 @@ class Gameboard:
         # Add the black pieces
         BLACK_RANGE = range(len(INITIAL_PIECES))
         for row in BLACK_RANGE:
-            for col in range(Gameboard.LENGTH):
+            for col in range(BoardInfo.LENGTH):
                 piece_symbol = INITIAL_PIECES[row][col]
                 self._add_board_piece(row, col, piece_symbol, Color.BLACK)
 
         # Add the white pieces
-        WHITE_RANGE = range(Gameboard.LENGTH - len(INITIAL_PIECES),
-                            Gameboard.LENGTH)
+        WHITE_RANGE = range(BoardInfo.LENGTH - len(INITIAL_PIECES),
+                            BoardInfo.LENGTH)
         for row in WHITE_RANGE:
-            for col in range(Gameboard.LENGTH):
-                piece_symbol = INITIAL_PIECES[Gameboard.LENGTH - 1 - row][col]
+            for col in range(BoardInfo.LENGTH):
+                piece_symbol = INITIAL_PIECES[BoardInfo.LENGTH - 1 - row][col]
                 self._add_board_piece(row, col, piece_symbol, Color.WHITE)
 
     def _initialize_board(self) -> None:
@@ -78,16 +82,16 @@ class Gameboard:
     def print_board(self) -> None:
         """Print the chess board as seen by the white player, with rank numbers
         and file letters."""
-        for i in range(Gameboard.LENGTH):
-            print(Gameboard.RANK_NUMBERS[i], end='   ')
-            for j in range(Gameboard.LENGTH):
+        for i in range(BoardInfo.LENGTH):
+            print(BoardInfo.RANK_NUMBERS[i], end='   ')
+            for j in range(BoardInfo.LENGTH):
                 square = self._board[i][j]
                 if not square.is_empty():
                     print(square.piece.symbol, end=' ')
                 else:
                     print(' ', end=' ')
             print()
-        print(f'\n    {" ".join(Gameboard.FILE_LETTERS)}')
+        print(f'\n    {" ".join(BoardInfo.FILE_LETTERS)}')
 
     def get_board_copy(self) -> 'Gameboard':
         return copy.deepcopy(self._board)
