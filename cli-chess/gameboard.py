@@ -110,6 +110,3 @@ class Gameboard:
                     print(' ', end=' ')
             print()
         print(f'\n    {" ".join(BoardInfo.FILE_LETTERS)}')
-
-    def get_board_copy(self) -> 'Gameboard':
-        return copy.deepcopy(self._board)
