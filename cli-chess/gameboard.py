@@ -110,3 +110,18 @@ class Gameboard:
                     print(' ', end=' ')
             print()
         print(f'\n    {" ".join(BoardInfo.FILE_LETTERS)}')
+
+    @staticmethod
+    def _file_to_col(file: str) -> int:
+        """Map a chess file (a-h) to the corresponding board column (0-7)."""
+        # Since the files (a-h) map to the column indices (0-7) in ascending
+        # order, the relative order of the file characters can be used to get
+        # the corresponding column index.
+        return ord(file) - ord('a')
+
+    @staticmethod
+    def _rank_to_row(rank: str) -> int:
+        """Map a chess rank (1-8) to the corresponding board row (7-0)."""
+        # This makes use of the fact that the rank number (1-8) and the
+        # corresponding row index (7-0) always add up to the board length (8).
+        return BoardInfo.LENGTH - rank
