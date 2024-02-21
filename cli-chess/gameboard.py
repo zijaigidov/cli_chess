@@ -4,10 +4,16 @@ import copy
 from dataclasses import dataclass
 from typing import Optional
 
-import gamepieces
-
 
 class Piece:
+    KING = 'K'
+    QUEEN = 'Q'
+    ROOK = 'R'
+    BISHOP = 'B'
+    KNIGHT = 'N'
+    PAWN = 'P'
+    PIECES = {KING, QUEEN, ROOK, BISHOP, KNIGHT, PAWN}
+
     def __init__(self, symbol: str, color: str):
         self.symbol = symbol
         self.color = color
