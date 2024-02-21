@@ -83,4 +83,4 @@ class Gameboard:
         """Map a chess rank (1-8) to the corresponding board row (7-0)."""
         # This makes use of the fact that the rank number (1-8) and the
         # corresponding row index (7-0) always add up to the board length (8).
-        return BoardInfo.LENGTH - rank
+        return BoardInfo.LENGTH - int(rank)
