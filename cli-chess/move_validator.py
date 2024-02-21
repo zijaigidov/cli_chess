@@ -1,6 +1,6 @@
 # move_validator.py
 
-from gameboard import Square
+from square import Square
 
 
 class InvalidSquareError (Exception):
