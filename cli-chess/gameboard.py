@@ -1,9 +1,11 @@
 # gameboard.py
 
+
 import copy
 from dataclasses import dataclass
 
 from board_info import BoardInfo
+from move_validator import InvalidSquareError
 from square import Square, Piece
 
 
@@ -69,6 +71,28 @@ class Gameboard:
                     print(' ', end=' ')
             print()
         print(f'\n    {" ".join(BoardInfo.FILE_LETTERS)}')
+
+    def get_square_piece(self, square_coordinates: str) -> Piece | None:
+        """Get a copy of the piece on the square with the given coordinates.
+
+        Args:
+            square_coordinates: The coordinates of the square, where the first 
+              character is the fileand the second is the rank, e.g. 'e4'.
+
+        Returns:
+            A copy of the Piece object on the square, or None if there is none.
+
+        Raises:
+            InvalidSquareError: If the coordinates for the square are invalid.
+        """
+        if not Square.is_valid_square(square_coordinates):
+            raise InvalidSquareError(f"invalid square: '{square_coordinates}'")
+
+        file, rank = square_coordinates
+        col = Gameboard._file_to_col(file)
+        row = Gameboard._rank_to_row(rank)
+
+        return copy.copy(self._board[row][col].piece)
 
     @staticmethod
     def _file_to_col(file: str) -> int:
