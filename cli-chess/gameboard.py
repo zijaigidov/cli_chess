@@ -5,7 +5,7 @@ import copy
 from dataclasses import dataclass
 
 from board_info import BoardInfo
-from move_validator import InvalidSquareError
+from error import InvalidSquareError
 from square import Square, Piece
 
 

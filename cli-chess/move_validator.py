@@ -1,10 +1,7 @@
 # move_validator.py
 
+from error import InvalidSquareError
 from square import Square
-
-
-class InvalidSquareError (Exception):
-    pass
 
 
 class MoveValidator:
