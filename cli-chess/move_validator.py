@@ -1,6 +1,5 @@
 # move_validator.py
 
-from error import InvalidSquareError
 from square import Square
 
 
@@ -30,7 +29,7 @@ class MoveValidator:
         """
 
         # Check if the square coordinates are valid
-        if not Square.is_valid_square(start_coordinates):
-            raise InvalidSquareError(f"invalid square: '{start_coordinates}'")
-        elif not Square.is_valid_square(end_coordinates):
-            raise InvalidSquareError(f"invalid square: '{end_coordinates}'")
+        start_valid = Square.is_valid_square(start_coordinates)
+        end_valid = Square.is_valid_square(end_coordinates)
+        if not start_valid or not end_valid:
+            return False
