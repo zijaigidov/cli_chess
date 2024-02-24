@@ -1,7 +1,5 @@
 # square.py
 
-from typing import Optional
-
 from board_info import BoardInfo
 
 
@@ -20,12 +18,6 @@ class Piece:
 
 
 class Square:
-    def __init__(self, piece: Optional[Piece] = None):
-        self.piece = piece
-
-    def is_empty(self) -> bool:
-        return self.piece is None
-
     @staticmethod
     def is_valid_square(square_coordinates: str) -> bool:
         """Check if a square described by a file and rank is valid.

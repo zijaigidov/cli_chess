@@ -22,14 +22,13 @@ class Gameboard:
 
     def _initialize_empty_board(self) -> None:
         """Initialize an empty board."""
-        self._board = [[Square() for _ in range(BoardInfo.LENGTH)]
-                       for _ in range(BoardInfo.LENGTH)]
+        self._board = [
+            [None] * BoardInfo.LENGTH for _ in range(BoardInfo.LENGTH)]
 
     def _add_board_piece(self, row: int, col: int, symbol: str,
                          color: str) -> None:
         """Add a piece to the board on the specified position."""
-        square = self._board[row][col]
-        square.piece = Piece(symbol, color)
+        self._board[row][col] = Piece(symbol, color)
 
     def _add_initial_pieces(self) -> None:
         """Add the initial pieces to the board."""
@@ -64,9 +63,9 @@ class Gameboard:
         for i in range(BoardInfo.LENGTH):
             print(BoardInfo.RANK_NUMBERS[i], end='   ')
             for j in range(BoardInfo.LENGTH):
-                square = self._board[i][j]
-                if not square.is_empty():
-                    print(square.piece.symbol, end=' ')
+                piece = self._board[i][j]
+                if piece:
+                    print(piece.symbol, end=' ')
                 else:
                     print(' ', end=' ')
             print()
@@ -100,7 +99,7 @@ class Gameboard:
         col = Gameboard._file_to_col(file)
         row = Gameboard._rank_to_row(rank)
 
-        return copy.copy(self._board[row][col].piece)
+        return copy.copy(self._board[row][col])
 
     @staticmethod
     def _file_to_col(file: str) -> int:
