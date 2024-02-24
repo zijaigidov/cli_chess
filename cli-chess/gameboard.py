@@ -72,6 +72,14 @@ class Gameboard:
             print()
         print(f'\n    {" ".join(BoardInfo.FILE_LETTERS)}')
 
+    def get_board(self) -> list[list[Square]]:
+        """Get a copy of the game board.
+
+        Returns:
+            A copy of the 2D-array used to store the board state.
+        """
+        return copy.deepcopy(self._board)
+
     def get_square_piece(self, square_coordinates: str) -> Piece | None:
         """Get a copy of the piece on the square with the given coordinates.
 
