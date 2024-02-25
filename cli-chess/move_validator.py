@@ -37,6 +37,11 @@ class MoveValidator:
 
         # Check if there's a piece on the starting square and if it belongs to
         # the player making the move.
-        piece = gameboard.get_square_piece(start_coordinates)
-        if not piece or not piece.color == player_color:
+        start_piece = gameboard.get_square_piece(start_coordinates)
+        if not start_piece or not start_piece.color == player_color:
+            return False
+
+        # Check that the end square doesn't have a piece of the same color
+        end_piece = gameboard.get_square_piece(end_coordinates)
+        if end_piece and end_piece.color == player_color:
             return False
