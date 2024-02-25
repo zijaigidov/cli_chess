@@ -17,7 +17,7 @@ class MoveValidator:
         Args:
             start_coordinates: The coordinates of the square the piece is on
               before the move.
-            end_square: The coordinates of the square the piece is on after the
+            end_coordinates: The coordinates of the square the piece is on after the
               move.
             player_color: The color of the player making the move.
             gameboard: The Gameboard object.
