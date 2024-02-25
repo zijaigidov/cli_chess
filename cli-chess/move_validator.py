@@ -24,9 +24,6 @@ class MoveValidator:
 
         Returns:
             A boolean indicating whether or not the move is legal.
-
-        Raises:
-            InvalidSquareError: If invalid square coordinates are passed.
         """
 
         # Check if the square coordinates are valid
