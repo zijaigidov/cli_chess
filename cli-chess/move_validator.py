@@ -27,18 +27,31 @@ class MoveValidator:
         """
 
         # Check if the square coordinates are valid
-        start_valid = Square.is_valid_square(start_coordinates)
-        end_valid = Square.is_valid_square(end_coordinates)
-        if not start_valid or not end_valid:
+        if (not Square.is_valid_square(start_coordinates) or
+                not Square.is_valid_square(end_coordinates)):
             return False
 
-        # Check if there's a piece on the starting square and if it belongs to
-        # the player making the move.
+        # Check if there's a piece on the starting square, and if it belongs
+        # to the player.
+        if not MoveValidator._is_allowed_start_square(
+                start_coordinates, player_color, gameboard):
+            return False
+
+        # Check if the user's allowed to occupy the end square.
+        if not MoveValidator._is_allowed_end_square(
+                end_coordinates, player_color, gameboard):
+            return False
+
+    @staticmethod
+    def _is_allowed_start_square(start_coordinates: str,
+                                 player_color: str,
+                                 gameboard: Gameboard) -> bool:
         start_piece = gameboard.get_square_piece(start_coordinates)
-        if not start_piece or not start_piece.color == player_color:
-            return False
+        return start_piece and start_piece.color == player_color
 
-        # Check that the end square doesn't have a piece of the same color
+    @staticmethod
+    def _is_allowed_end_square(end_coordinates: str,
+                               player_color: str,
+                               gameboard: Gameboard) -> bool:
         end_piece = gameboard.get_square_piece(end_coordinates)
-        if end_piece and end_piece.color == player_color:
-            return False
+        return not end_piece or end_piece.color != player_color
