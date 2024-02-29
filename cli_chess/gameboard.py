@@ -4,9 +4,9 @@
 import copy
 from dataclasses import dataclass
 
-from board_info import BoardInfo
-from error import InvalidSquareError
-from square import Square, Piece
+from .board_info import BoardInfo
+from .error import InvalidSquareError
+from .square import Square, Piece
 
 
 @dataclass

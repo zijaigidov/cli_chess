@@ -1,6 +1,6 @@
 # square.py
 
-from board_info import BoardInfo
+from .board_info import BoardInfo
 
 
 class Piece:
