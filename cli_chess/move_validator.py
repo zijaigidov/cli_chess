@@ -78,3 +78,13 @@ class MoveValidator:
         file_start, rank_start = start_coordinates
         file_end, rank_end = end_coordinates
         return file_start == file_end and rank_start != rank_end
+
+    @staticmethod
+    def _is_diagonal_move(start_coordinates: str,
+                          end_coordinates: str) -> bool:
+        file_start, rank_start = start_coordinates
+        file_end, rank_end = end_coordinates
+
+        file_dist = MoveValidator._get_file_distance(file_start, file_end)
+        rank_dist = MoveValidator._get_rank_distance(rank_start, rank_end)
+        return file_dist == rank_dist and start_coordinates != end_coordinates
