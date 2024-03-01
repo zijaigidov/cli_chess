@@ -55,3 +55,12 @@ class MoveValidator:
                                gameboard: Gameboard) -> bool:
         end_piece = gameboard.get_square_piece(end_coordinates)
         return not end_piece or end_piece.color != player_color
+
+    @staticmethod
+    def _get_file_distance(file1: str, file2: str) -> int:
+        # Use the ASCII character codes of the file letters
+        return abs(ord(file1) - ord(file2))
+
+    @staticmethod
+    def _get_rank_distance(rank1: str, rank2: str) -> int:
+        return abs(int(rank1) - int(rank2))
