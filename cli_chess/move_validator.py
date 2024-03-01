@@ -64,3 +64,17 @@ class MoveValidator:
     @staticmethod
     def _get_rank_distance(rank1: str, rank2: str) -> int:
         return abs(int(rank1) - int(rank2))
+
+    @staticmethod
+    def _is_horizontal_move(start_coordinates: str,
+                            end_coordinates: str) -> bool:
+        file_start, rank_start = start_coordinates
+        file_end, rank_end = end_coordinates
+        return file_start != file_end and rank_start == rank_end
+
+    @staticmethod
+    def _is_vertical_move(start_coordinates: str,
+                          end_coordinates: str) -> bool:
+        file_start, rank_start = start_coordinates
+        file_end, rank_end = end_coordinates
+        return file_start == file_end and rank_start != rank_end
