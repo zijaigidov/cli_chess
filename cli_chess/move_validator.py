@@ -79,7 +79,8 @@ class MoveValidator:
         if piece.symbol == Piece.PAWN:
             pass
         if piece.symbol == Piece.KNIGHT:
-            pass
+            return MoveValidator._is_valid_knight_path(
+                start_coordinates, end_coordinates)
         if piece.symbol == Piece.BISHOP:
             return MoveValidator._is_valid_bishop_path(
                 start_coordinates, end_coordinates, gameboard)
@@ -91,6 +92,20 @@ class MoveValidator:
                 start_coordinates, end_coordinates, gameboard)
         if piece.symbol == Piece.KING:
             pass
+
+    @staticmethod
+    def _is_valid_knight_path(start_coordinates: str,
+                              end_coordinates: str) -> bool:
+        file_start, rank_start = start_coordinates
+        file_end, rank_end = end_coordinates
+
+        file_dist = MoveValidator._get_file_distance(file_start, file_end)
+        rank_dist = MoveValidator._get_rank_distance(rank_start, rank_end)
+
+        return (
+            (file_dist == 1 and rank_dist == 2) or
+            (file_dist == 2 and rank_dist == 1)
+        )
 
     @staticmethod
     def _is_valid_bishop_path(start_coordinates: str,
