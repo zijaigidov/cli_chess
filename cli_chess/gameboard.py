@@ -73,11 +73,11 @@ class Gameboard:
         file_end, rank_end = end_coordinates
 
         # Get the corresponding rows and columns
-        row_start = Gameboard._rank_to_row(rank_start)
-        row_end = Gameboard._rank_to_row(rank_end)
+        row_start = Gameboard.rank_to_row(rank_start)
+        row_end = Gameboard.rank_to_row(rank_end)
 
-        col_start = Gameboard._file_to_col(file_start)
-        col_end = Gameboard._file_to_col(file_end)
+        col_start = Gameboard.file_to_col(file_start)
+        col_end = Gameboard.file_to_col(file_end)
 
         # Move the piece from the starting square to the end square
         self._board[row_end][col_end] = self._board[row_start][col_start]
@@ -122,13 +122,13 @@ class Gameboard:
             raise InvalidSquareError(f"invalid square: '{square_coordinates}'")
 
         file, rank = square_coordinates
-        col = Gameboard._file_to_col(file)
-        row = Gameboard._rank_to_row(rank)
+        col = Gameboard.file_to_col(file)
+        row = Gameboard.rank_to_row(rank)
 
         return copy.copy(self._board[row][col])
 
     @staticmethod
-    def _file_to_col(file: str) -> int:
+    def file_to_col(file: str) -> int:
         """Map a chess file (a-h) to the corresponding board column (0-7)."""
         # Since the files (a-h) map to the column indices (0-7) in ascending
         # order, the relative order of the file characters can be used to get
@@ -136,7 +136,7 @@ class Gameboard:
         return ord(file) - ord('a')
 
     @staticmethod
-    def _rank_to_row(rank: str) -> int:
+    def rank_to_row(rank: str) -> int:
         """Map a chess rank (1-8) to the corresponding board row (7-0)."""
         # This makes use of the fact that the rank number (1-8) and the
         # corresponding row index (7-0) always add up to the board length (8).

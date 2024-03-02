@@ -205,11 +205,11 @@ class MoveValidator:
         file_end, rank_end = end_coordinates
 
         # Convert the files and ranks to rows and columns in the board array
-        col_start = Gameboard._file_to_col(file_start)
-        col_end = Gameboard._file_to_col(file_end)
+        col_start = Gameboard.file_to_col(file_start)
+        col_end = Gameboard.file_to_col(file_end)
 
-        row_start = Gameboard._rank_to_row(rank_start)
-        row_end = Gameboard._rank_to_row(rank_end)
+        row_start = Gameboard.rank_to_row(rank_start)
+        row_end = Gameboard.rank_to_row(rank_end)
 
         # Check if there are pieces in the way on the same rank
         if MoveValidator._is_horizontal_move(
