@@ -1,6 +1,6 @@
 # move_validator.py
 
-from .square import Square
+from .square import Square, Piece
 from .gameboard import Gameboard
 
 
@@ -55,6 +55,39 @@ class MoveValidator:
                                gameboard: Gameboard) -> bool:
         end_piece = gameboard.get_square_piece(end_coordinates)
         return not end_piece or end_piece.color != player_color
+
+    @staticmethod
+    def _is_valid_piece_path(piece: Piece,
+                             start_coordinates: str,
+                             end_coordinates: str,
+                             gameboard: Gameboard) -> bool:
+        """Check if the piece can move along the path specified by the
+        coordinates.
+
+        Args:
+            piece: A Piece object for the given piece.
+            start_coordinates: The coordinates of the square the piece is on
+              before the move.
+            end_coordinates: The coordinates of the square the piece is on
+              after the move.
+            gameboard: The Gameboard object.
+
+        Returns:
+            A boolean indicating whether or not the piece can move along the
+              specified path.
+        """
+        if piece.symbol == Piece.PAWN:
+            pass
+        if piece.symbol == Piece.KNIGHT:
+            pass
+        if piece.symbol == Piece.BISHOP:
+            pass
+        if piece.symbol == Piece.ROOK:
+            pass
+        if piece.symbol == Piece.QUEEN:
+            pass
+        if piece.symbol == Piece.KING:
+            pass
 
     @staticmethod
     def _get_file_distance(file1: str, file2: str) -> int:
