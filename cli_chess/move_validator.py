@@ -91,7 +91,8 @@ class MoveValidator:
             return MoveValidator._is_valid_queen_path(
                 start_coordinates, end_coordinates, gameboard)
         if piece.symbol == Piece.KING:
-            pass
+            return MoveValidator._is_valid_king_path(
+                start_coordinates, end_coordinates)
 
     @staticmethod
     def _is_valid_knight_path(start_coordinates: str,
@@ -142,6 +143,22 @@ class MoveValidator:
                 start_coordinates, end_coordinates, gameboard)) and not
             MoveValidator._are_pieces_in_the_way(
                 start_coordinates, end_coordinates, gameboard)
+        )
+
+    @staticmethod
+    def _is_valid_king_path(start_coordinates: str,
+                            end_coordinates: str) -> bool:
+        file_start, rank_start = start_coordinates
+        file_end, rank_end = end_coordinates
+
+        file_dist = MoveValidator._get_file_distance(file_start, file_end)
+        rank_dist = MoveValidator._get_rank_distance(rank_start, rank_end)
+
+        # The king may move one square horizontally, vertically or diagonally
+        return (
+            (file_dist == 1 and rank_dist == 0) or  # Horizontal movement
+            (file_dist == 0 and rank_dist == 1) or  # Vertical movement
+            (file_dist == 1 and rank_dist == 1)     # Diagonal movement
         )
 
     @staticmethod
