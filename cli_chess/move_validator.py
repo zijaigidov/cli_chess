@@ -81,13 +81,25 @@ class MoveValidator:
         if piece.symbol == Piece.KNIGHT:
             pass
         if piece.symbol == Piece.BISHOP:
-            pass
+            return MoveValidator._is_valid_bishop_path(
+                start_coordinates, end_coordinates, gameboard)
         if piece.symbol == Piece.ROOK:
             pass
         if piece.symbol == Piece.QUEEN:
             pass
         if piece.symbol == Piece.KING:
             pass
+
+    @staticmethod
+    def _is_valid_bishop_path(start_coordinates: str,
+                              end_coordinates: str,
+                              gameboard: Gameboard) -> bool:
+        return (
+            MoveValidator._is_diagonal_move(
+                start_coordinates, end_coordinates, gameboard) and
+            MoveValidator._are_pieces_in_the_way(
+                start_coordinates, end_coordinates, gameboard)
+        )
 
     @staticmethod
     def _get_file_distance(file1: str, file2: str) -> int:
