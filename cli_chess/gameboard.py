@@ -57,6 +57,32 @@ class Gameboard:
         self._initialize_empty_board()
         self._add_initial_pieces()
 
+    def play_move(self,
+                  start_coordinates: str,
+                  end_coordinates: str) -> None:
+        """Move a piece from one square to another.
+
+        Args:
+            start_coordinates: The coordinates of the square the piece is on
+              before the move.
+            end_coordinates: The coordinates of the square the piece is on after
+              the move.
+        """
+        # Extract the files and ranks
+        file_start, rank_start = start_coordinates
+        file_end, rank_end = end_coordinates
+
+        # Get the corresponding rows and columns
+        row_start = Gameboard._rank_to_row(rank_start)
+        row_end = Gameboard._rank_to_row(rank_end)
+
+        col_start = Gameboard._file_to_col(file_start)
+        col_end = Gameboard._file_to_col(file_end)
+
+        # Move the piece from the starting square to the end square
+        self._board[row_end][col_end] = self._board[row_start][col_start]
+        self._board[row_start][col_start] = None
+
     def print_board(self) -> None:
         """Print the chess board as seen by the white player, with rank numbers
         and file letters."""
