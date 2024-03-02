@@ -121,3 +121,51 @@ class MoveValidator:
         file_dist = MoveValidator._get_file_distance(file_start, file_end)
         rank_dist = MoveValidator._get_rank_distance(rank_start, rank_end)
         return file_dist == rank_dist and start_coordinates != end_coordinates
+
+    @staticmethod
+    def _are_pieces_in_the_way(start_coordinates: str,
+                               end_coordinates: str,
+                               gameboard: Gameboard) -> bool:
+        board = gameboard.get_board()
+
+        # Extract the files and ranks
+        file_start, rank_start = start_coordinates
+        file_end, rank_end = end_coordinates
+
+        # Convert the files and ranks to rows and columns in the board array
+        col_start = Gameboard._file_to_col(file_start)
+        col_end = Gameboard._file_to_col(file_end)
+
+        row_start = Gameboard._rank_to_row(rank_start)
+        row_end = Gameboard._rank_to_row(rank_end)
+
+        # Check if there are pieces in the way on the same rank
+        if MoveValidator._is_horizontal_move(
+                start_coordinates, end_coordinates):
+            start, end = sorted((col_start, col_end))
+            for col in range(start + 1, end):
+                if board[row_start][col]:
+                    return True
+
+        # Check if there are pieces in the way on the same file
+        elif MoveValidator._is_vertical_move(
+                start_coordinates, end_coordinates):
+            start, end = sorted((row_start, row_end))
+            for row in range(start + 1, end):
+                if board[row][col_start]:
+                    return True
+
+        # Check if there are pieces in the way diagonally
+        elif MoveValidator._is_diagonal_move(
+                start_coordinates, end_coordinates):
+            row_step = 1 if row_start < row_end else -1
+            col_step = 1 if col_start < col_end else -1
+
+            row, col = row_start + row_step, col_start + col_step
+            while col != col_end and row != row_end:
+                if board[row][col]:
+                    return True
+                row += row_step
+                col += col_step
+
+        return False
