@@ -87,7 +87,8 @@ class MoveValidator:
             return MoveValidator._is_valid_rook_path(
                 start_coordinates, end_coordinates, gameboard)
         if piece.symbol == Piece.QUEEN:
-            pass
+            return MoveValidator._is_valid_queen_path(
+                start_coordinates, end_coordinates, gameboard)
         if piece.symbol == Piece.KING:
             pass
 
@@ -109,6 +110,21 @@ class MoveValidator:
         return (
             MoveValidator._is_horizontal_move(
                 start_coordinates, end_coordinates, gameboard) and not
+            MoveValidator._are_pieces_in_the_way(
+                start_coordinates, end_coordinates, gameboard)
+        )
+
+    @staticmethod
+    def _is_valid_queen_path(start_coordinates: str,
+                             end_coordinates: str,
+                             gameboard: Gameboard) -> bool:
+        return (
+            (MoveValidator._is_horizontal_move(
+                start_coordinates, end_coordinates, gameboard) or
+             MoveValidator._is_vertical_move(
+                start_coordinates, end_coordinates, gameboard) or
+             MoveValidator._is_diagonal_move(
+                start_coordinates, end_coordinates, gameboard)) and not
             MoveValidator._are_pieces_in_the_way(
                 start_coordinates, end_coordinates, gameboard)
         )
