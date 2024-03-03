@@ -32,3 +32,10 @@ def test_is_diagonal_move():
     assert MoveValidator._is_diagonal_move('a1', 'h8') == True
     assert MoveValidator._is_diagonal_move('e4', 'e4') == False
     assert MoveValidator._is_diagonal_move('e4', 'c5') == False
+
+
+def test_is_valid_knight_path():
+    assert MoveValidator._is_valid_knight_path('e4', 'c5') == True
+    assert MoveValidator._is_valid_knight_path('e4', 'f2') == True
+    assert MoveValidator._is_valid_knight_path('e4', 'c6') == False
+    assert MoveValidator._is_valid_knight_path('e4', 'h4') == False
