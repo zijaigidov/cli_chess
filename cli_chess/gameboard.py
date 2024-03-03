@@ -3,6 +3,7 @@
 
 import copy
 from dataclasses import dataclass
+from typing import List
 
 from .board_info import BoardInfo
 from .error import InvalidSquareError
@@ -17,45 +18,56 @@ class Color:
 
 
 class Gameboard:
-    def __init__(self):
-        self._initialize_board()
+    # Note: whitespace strings have been added for formatting purposes
+    INITIAL_BOARD_STATE = [
+        ['R_b', 'N_b', 'B_b', 'Q_b', 'K_b', 'B_b', 'N_b', 'R_b'],
+        ['P_b', 'P_b', 'P_b', 'P_b', 'P_b', 'P_b', 'P_b', 'P_b'],
+        ['   ', '   ', '   ', '   ', '   ', '   ', '   ', '   '],
+        ['   ', '   ', '   ', '   ', '   ', '   ', '   ', '   '],
+        ['   ', '   ', '   ', '   ', '   ', '   ', '   ', '   '],
+        ['   ', '   ', '   ', '   ', '   ', '   ', '   ', '   '],
+        ['P_w', 'P_w', 'P_w', 'P_w', 'P_w', 'P_w', 'P_w', 'P_w'],
+        ['R_w', 'N_w', 'B_w', 'Q_w', 'K_w', 'B_w', 'N_w', 'R_w']
+    ]
 
-    def _initialize_empty_board(self) -> None:
-        """Initialize an empty board."""
-        self._board = [
-            [None] * BoardInfo.LENGTH for _ in range(BoardInfo.LENGTH)]
+    def __init__(self,
+                 board_state: List[List[str]] = INITIAL_BOARD_STATE) -> None:
+        """Initialize the chess board with an optional board state.
 
-    def _add_board_piece(self, row: int, col: int, symbol: str,
-                         color: str) -> None:
-        """Add a piece to the board on the specified position."""
-        self._board[row][col] = Piece(symbol, color)
+        If no board state is given, the board is initialized as the starting 
+        board.
 
-    def _add_initial_pieces(self) -> None:
-        """Add the initial pieces to the board."""
-        INITIAL_PIECES = (
-            ('R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'),
-            ('P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'),
-        )
+        Args:
+            board_state: A 2D list representation of the board with strings to
+              denote the pieces. The strings consist of a piece symbol, a
+              separator, and a color, e.g. 'K_w' for the white king. If a board 
+              square is empty, the corresponding string is denoted by three 
+              whitespace characters.
+        """
+        self._board = Gameboard._initialize_board(board_state)
 
-        # Add the black pieces
-        BLACK_RANGE = range(len(INITIAL_PIECES))
-        for row in BLACK_RANGE:
-            for col in range(BoardInfo.LENGTH):
-                piece_symbol = INITIAL_PIECES[row][col]
-                self._add_board_piece(row, col, piece_symbol, Color.BLACK)
+    def _initialize_board(
+            board_state: List[List[str]]) -> List[List[Piece | None]]:
+        """Return the initialized board.
 
-        # Add the white pieces
-        WHITE_RANGE = range(BoardInfo.LENGTH - len(INITIAL_PIECES),
-                            BoardInfo.LENGTH)
-        for row in WHITE_RANGE:
-            for col in range(BoardInfo.LENGTH):
-                piece_symbol = INITIAL_PIECES[BoardInfo.LENGTH - 1 - row][col]
-                self._add_board_piece(row, col, piece_symbol, Color.WHITE)
+        Returns:
+            A 2D list representation of the board which contains Piece objects
+            or None where there are none.
+        """
+        def piece_repr_to_piece(piece_repr: str) -> Piece | None:
+            piece_symbol = Piece.extract_symbol_from_repr(piece_repr)
+            if piece_symbol in Piece.PIECES:
+                return Piece(piece_repr)
+            return None
 
-    def _initialize_board(self) -> None:
-        """Initialize the state of the game board."""
-        self._initialize_empty_board()
-        self._add_initial_pieces()
+        initialized_board = []
+        for row in board_state:
+            initialized_row = []
+            for piece in row:
+                initialized_row.append(piece_repr_to_piece(piece))
+            initialized_board.append(initialized_row)
+
+        return initialized_board
 
     def play_move(self,
                   start_coordinates: str,
@@ -84,17 +96,20 @@ class Gameboard:
         self._board[row_start][col_start] = None
 
     def print_board(self) -> None:
-        """Print the chess board as seen by the white player, with rank numbers
-        and file letters."""
-        for i in range(BoardInfo.LENGTH):
-            print(BoardInfo.RANK_NUMBERS[i], end='   ')
-            for j in range(BoardInfo.LENGTH):
-                piece = self._board[i][j]
+        """Print the chess board as seen by the white player, with the ranks and
+        files shown."""
+        board_len = len(self._board)
+
+        for row in range(board_len):
+            print(BoardInfo.RANK_NUMBERS[row], end='   ')
+            for col in range(board_len):
+                piece = self._board[row][col]
                 if piece:
                     print(piece.symbol, end=' ')
                 else:
                     print(' ', end=' ')
             print()
+
         print(f'\n    {" ".join(BoardInfo.FILE_LETTERS)}')
 
     def get_board(self) -> list[list[Square]]:
