@@ -7,7 +7,8 @@ from typing import List
 
 from .board_info import BoardInfo
 from .error import InvalidSquareError
-from .square import Square, Piece
+from .piece import Piece
+from .square import Square
 
 
 @dataclass

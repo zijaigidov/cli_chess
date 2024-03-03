@@ -1,7 +1,8 @@
 # move_validator.py
 
-from .square import Square, Piece
 from .gameboard import Gameboard
+from .piece import Piece
+from .square import Square
 
 
 class MoveValidator:
