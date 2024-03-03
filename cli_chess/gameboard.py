@@ -20,7 +20,7 @@ class Color:
 
 class Gameboard:
     # Note: whitespace strings have been added for formatting purposes
-    INITIAL_BOARD_STATE = [
+    STARTING_BOARD = [
         ['R_b', 'N_b', 'B_b', 'Q_b', 'K_b', 'B_b', 'N_b', 'R_b'],
         ['P_b', 'P_b', 'P_b', 'P_b', 'P_b', 'P_b', 'P_b', 'P_b'],
         ['   ', '   ', '   ', '   ', '   ', '   ', '   ', '   '],
@@ -32,7 +32,7 @@ class Gameboard:
     ]
 
     def __init__(self,
-                 board_state: List[List[str]] = INITIAL_BOARD_STATE) -> None:
+                 board_state: List[List[str]] = STARTING_BOARD) -> None:
         """Initialize the chess board with an optional board state.
 
         If no board state is given, the board is initialized as the starting 
