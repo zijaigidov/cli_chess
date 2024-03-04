@@ -15,31 +15,31 @@ def test_get_rank_distance():
 
 
 def test_is_horizontal_move():
-    assert MoveValidator._is_horizontal_move('a1', 'h1') == True
-    assert MoveValidator._is_horizontal_move('a1', 'a1') == False
-    assert MoveValidator._is_horizontal_move('a1', 'a8') == False
-    assert MoveValidator._is_horizontal_move('e4', 'd5') == False
+    assert MoveValidator._is_horizontal_move('a1', 'h1')
+    assert not MoveValidator._is_horizontal_move('a1', 'a1')
+    assert not MoveValidator._is_horizontal_move('a1', 'a8')
+    assert not MoveValidator._is_horizontal_move('e4', 'd5')
 
 
 def test_is_vertical_move():
-    assert MoveValidator._is_vertical_move('a1', 'a8') == True
-    assert MoveValidator._is_vertical_move('a1', 'a1') == False
-    assert MoveValidator._is_vertical_move('a1', 'h1') == False
-    assert MoveValidator._is_vertical_move('e4', 'd5') == False
+    assert MoveValidator._is_vertical_move('a1', 'a8')
+    assert not MoveValidator._is_vertical_move('a1', 'a1')
+    assert not MoveValidator._is_vertical_move('a1', 'h1')
+    assert not MoveValidator._is_vertical_move('e4', 'd5')
 
 
 def test_is_diagonal_move():
-    assert MoveValidator._is_diagonal_move('e4', 'd5') == True
-    assert MoveValidator._is_diagonal_move('a1', 'h8') == True
-    assert MoveValidator._is_diagonal_move('e4', 'e4') == False
-    assert MoveValidator._is_diagonal_move('e4', 'c5') == False
+    assert MoveValidator._is_diagonal_move('e4', 'd5')
+    assert MoveValidator._is_diagonal_move('a1', 'h8')
+    assert not MoveValidator._is_diagonal_move('e4', 'e4')
+    assert not MoveValidator._is_diagonal_move('e4', 'c5')
 
 
 def test_is_valid_knight_path():
-    assert MoveValidator._is_valid_knight_path('e4', 'c5') == True
-    assert MoveValidator._is_valid_knight_path('e4', 'f2') == True
-    assert MoveValidator._is_valid_knight_path('e4', 'c6') == False
-    assert MoveValidator._is_valid_knight_path('e4', 'h4') == False
+    assert MoveValidator._is_valid_knight_path('e4', 'c5')
+    assert MoveValidator._is_valid_knight_path('e4', 'f2')
+    assert not MoveValidator._is_valid_knight_path('e4', 'c6')
+    assert not MoveValidator._is_valid_knight_path('e4', 'h4')
 
 
 def test_is_valid_bishop_path():
@@ -55,10 +55,10 @@ def test_is_valid_bishop_path():
     ]
     gameboard = Gameboard(board_state)
 
-    assert MoveValidator._is_valid_bishop_path('d4', 'f6', gameboard) == True
-    assert MoveValidator._is_valid_bishop_path('d4', 'a7', gameboard) == True
-    assert MoveValidator._is_valid_bishop_path('d4', 'g1', gameboard) == True
+    assert MoveValidator._is_valid_bishop_path('d4', 'f6', gameboard)
+    assert MoveValidator._is_valid_bishop_path('d4', 'a7', gameboard)
+    assert MoveValidator._is_valid_bishop_path('d4', 'g1', gameboard)
 
-    assert MoveValidator._is_valid_bishop_path('d4', 'f4', gameboard) == False
-    assert MoveValidator._is_valid_bishop_path('d4', 'b7', gameboard) == False
-    assert MoveValidator._is_valid_bishop_path('d4', 'g7', gameboard) == False
+    assert not MoveValidator._is_valid_bishop_path('d4', 'f4', gameboard)
+    assert not MoveValidator._is_valid_bishop_path('d4', 'b7', gameboard)
+    assert not MoveValidator._is_valid_bishop_path('d4', 'g7', gameboard)
