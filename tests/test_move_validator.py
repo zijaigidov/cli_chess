@@ -62,3 +62,24 @@ def test_is_valid_bishop_path():
     assert not MoveValidator._is_valid_bishop_path('d4', 'f4', gameboard)
     assert not MoveValidator._is_valid_bishop_path('d4', 'b7', gameboard)
     assert not MoveValidator._is_valid_bishop_path('d4', 'g7', gameboard)
+
+
+def test_is_valid_rook_path():
+    board_state = [
+        ['   ', '   ', '   ', '   ', '   ', '   ', '   ', '   '],
+        ['   ', '   ', '   ', '   ', '   ', '   ', '   ', '   '],
+        ['   ', '   ', '   ', '   ', '   ', '   ', '   ', '   '],
+        ['   ', '   ', '   ', '   ', '   ', '   ', '   ', '   '],
+        ['   ', '   ', '   ', 'R_w', '   ', '   ', 'P_b', '   '],
+        ['   ', '   ', '   ', '   ', '   ', '   ', '   ', '   '],
+        ['   ', '   ', '   ', '   ', '   ', '   ', '   ', '   '],
+        ['   ', '   ', '   ', '   ', '   ', '   ', '   ', '   '],
+    ]
+    gameboard = Gameboard(board_state)
+
+    assert MoveValidator._is_valid_rook_path('d4', 'd8', gameboard)
+    assert MoveValidator._is_valid_rook_path('d4', 'a4', gameboard)
+    assert MoveValidator._is_valid_rook_path('d4', 'g4', gameboard)
+
+    assert not MoveValidator._is_valid_rook_path('d4', 'e3', gameboard)
+    assert not MoveValidator._is_valid_rook_path('d4', 'h4', gameboard)
