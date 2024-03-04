@@ -125,8 +125,11 @@ class MoveValidator:
                             end_coordinates: str,
                             gameboard: Gameboard) -> bool:
         return (
-            MoveValidator._is_horizontal_move(
-                start_coordinates, end_coordinates) and not
+            (MoveValidator._is_horizontal_move(
+                start_coordinates, end_coordinates) or
+             MoveValidator._is_vertical_move(
+                start_coordinates, end_coordinates)
+             ) and not
             MoveValidator._are_pieces_in_the_way(
                 start_coordinates, end_coordinates, gameboard)
         )
