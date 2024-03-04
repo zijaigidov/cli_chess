@@ -1,5 +1,6 @@
 # test_move_validator.py
 
+from ..cli_chess.gameboard import Gameboard
 from ..cli_chess.move_validator import MoveValidator
 
 
@@ -39,3 +40,25 @@ def test_is_valid_knight_path():
     assert MoveValidator._is_valid_knight_path('e4', 'f2') == True
     assert MoveValidator._is_valid_knight_path('e4', 'c6') == False
     assert MoveValidator._is_valid_knight_path('e4', 'h4') == False
+
+
+def test_is_valid_bishop_path():
+    board_state = [
+        ['   ', '   ', '   ', '   ', '   ', '   ', '   ', '   '],
+        ['   ', '   ', '   ', '   ', '   ', '   ', '   ', '   '],
+        ['   ', '   ', '   ', '   ', '   ', 'P_b', '   ', '   '],
+        ['   ', '   ', '   ', '   ', '   ', '   ', '   ', '   '],
+        ['   ', '   ', '   ', 'B_w', '   ', '   ', '   ', '   '],
+        ['   ', '   ', '   ', '   ', '   ', '   ', '   ', '   '],
+        ['   ', '   ', '   ', '   ', '   ', '   ', '   ', '   '],
+        ['   ', '   ', '   ', '   ', '   ', '   ', '   ', '   '],
+    ]
+    gameboard = Gameboard(board_state)
+
+    assert MoveValidator._is_valid_bishop_path('d4', 'f6', gameboard) == True
+    assert MoveValidator._is_valid_bishop_path('d4', 'a7', gameboard) == True
+    assert MoveValidator._is_valid_bishop_path('d4', 'g1', gameboard) == True
+
+    assert MoveValidator._is_valid_bishop_path('d4', 'f4', gameboard) == False
+    assert MoveValidator._is_valid_bishop_path('d4', 'b7', gameboard) == False
+    assert MoveValidator._is_valid_bishop_path('d4', 'g7', gameboard) == False
