@@ -104,3 +104,25 @@ def test_is_valid_rook_path():
 
     assert not MoveValidator._is_valid_queen_path('d4', 'e1', gameboard)
     assert not MoveValidator._is_valid_queen_path('d4', 'h8', gameboard)
+
+
+def test_is_valid_king_path():
+    board_state = [
+        ['   ', '   ', '   ', '   ', '   ', '   ', '   ', '   '],
+        ['   ', '   ', '   ', '   ', '   ', '   ', '   ', '   '],
+        ['   ', '   ', '   ', '   ', '   ', '   ', '   ', '   '],
+        ['   ', '   ', '   ', '   ', '   ', '   ', '   ', '   '],
+        ['   ', '   ', '   ', 'K_w', 'P_b', '   ', '   ', '   '],
+        ['   ', '   ', '   ', '   ', '   ', '   ', '   ', '   '],
+        ['   ', '   ', '   ', '   ', '   ', '   ', '   ', '   '],
+        ['   ', '   ', '   ', '   ', '   ', '   ', '   ', '   '],
+    ]
+    gameboard = Gameboard(board_state)
+
+    assert MoveValidator._is_valid_king_path('d4', 'c4')
+    assert MoveValidator._is_valid_king_path('d4', 'd5')
+    assert MoveValidator._is_valid_king_path('d4', 'c5')
+    assert MoveValidator._is_valid_king_path('d4', 'c4')
+
+    assert not MoveValidator._is_valid_king_path('d4', 'd6')
+    assert not MoveValidator._is_valid_king_path('d4', 'f2')
