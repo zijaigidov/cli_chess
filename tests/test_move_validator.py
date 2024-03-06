@@ -85,7 +85,7 @@ def test_is_valid_rook_path():
     assert not MoveValidator._is_valid_rook_path('d4', 'h4', gameboard)
 
 
-def test_is_valid_rook_path():
+def test_is_valid_queen_path():
     board_state = [
         ['   ', '   ', '   ', '   ', '   ', '   ', '   ', '   '],
         ['   ', '   ', '   ', '   ', '   ', '   ', 'P_b', '   '],
