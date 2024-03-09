@@ -71,19 +71,19 @@ class Gameboard:
         return initialized_board
 
     def play_move(self,
-                  start_coordinates: str,
-                  end_coordinates: str) -> None:
+                  start_coords: str,
+                  end_coords: str) -> None:
         """Move a piece from one square to another.
 
         Args:
-            start_coordinates: The coordinates of the square the piece is on
-              before the move.
-            end_coordinates: The coordinates of the square the piece is on after
+            start_coords: The coordinates of the square the piece is on before
               the move.
+            end_coords: The coordinates of the square the piece is on after the
+              move.
         """
         # Extract the files and ranks
-        file_start, rank_start = start_coordinates
-        file_end, rank_end = end_coordinates
+        file_start, rank_start = start_coords
+        file_end, rank_end = end_coords
 
         # Get the corresponding rows and columns
         row_start = Gameboard.rank_to_row(rank_start)
@@ -121,12 +121,12 @@ class Gameboard:
         """
         return copy.deepcopy(self._board)
 
-    def get_square_piece(self, square_coordinates: str) -> Piece | None:
+    def get_square_piece(self, square_coords: str) -> Piece | None:
         """Get a copy of the piece on the square with the given coordinates.
 
         Args:
-            square_coordinates: The coordinates of the square, where the first 
-              character is the fileand the second is the rank, e.g. 'e4'.
+            square_coords: The coordinates of the square, where the first 
+              character is the file and the second is the rank, e.g. 'e4'.
 
         Returns:
             A copy of the Piece object on the square, or None if there is none.
@@ -134,10 +134,10 @@ class Gameboard:
         Raises:
             InvalidSquareError: If the coordinates for the square are invalid.
         """
-        if not Square.is_valid_square(square_coordinates):
-            raise InvalidSquareError(f"invalid square: '{square_coordinates}'")
+        if not Square.is_valid_square(square_coords):
+            raise InvalidSquareError(f"invalid square: '{square_coords}'")
 
-        file, rank = square_coordinates
+        file, rank = square_coords
         col = Gameboard.file_to_col(file)
         row = Gameboard.rank_to_row(rank)
 

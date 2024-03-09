@@ -5,13 +5,13 @@ from ..cli_chess.move_validator import MoveValidator
 
 
 def test_get_file_distance():
-    assert MoveValidator._get_file_distance('a', 'h') == 7
-    assert MoveValidator._get_file_distance('h', 'a') == 7
+    assert MoveValidator._get_file_dist('a', 'h') == 7
+    assert MoveValidator._get_file_dist('h', 'a') == 7
 
 
 def test_get_rank_distance():
-    assert MoveValidator._get_rank_distance('1', '8') == 7
-    assert MoveValidator._get_rank_distance('8', '1') == 7
+    assert MoveValidator._get_rank_dist('1', '8') == 7
+    assert MoveValidator._get_rank_dist('8', '1') == 7
 
 
 def test_is_horizontal_move():
