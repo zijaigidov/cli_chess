@@ -2,20 +2,12 @@
 
 
 import copy
-from dataclasses import dataclass
 from typing import List
 
 from .board_info import BoardInfo
 from .error import InvalidSquareError
 from .piece import Piece
 from .square import Square
-
-
-@dataclass
-class Color:
-    """A chess player's color."""
-    WHITE: str = 'white'
-    BLACK: str = 'black'
 
 
 class Gameboard:

@@ -1,5 +1,15 @@
 # piece.py
 
+from dataclasses import dataclass
+
+
+@dataclass
+class Color:
+    """A chess player's color."""
+    WHITE: str = 'white'
+    BLACK: str = 'black'
+
+
 class Piece:
     KING = 'K'
     QUEEN = 'Q'
