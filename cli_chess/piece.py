@@ -1,13 +1,9 @@
 # piece.py
 
-from dataclasses import dataclass
-
-
-@dataclass
-class Color:
-    """A chess player's color."""
-    WHITE: str = 'white'
-    BLACK: str = 'black'
+class ChessColor:
+    WHITE = 'w'
+    BLACK = 'b'
+    COLORS = {WHITE, BLACK}
 
 
 class Piece:
